@@ -51,12 +51,10 @@ for(i in seq_along(files)){
   if(i==1) keep <-NULL
 if(file.info(files[i])$size > 5){ # retrieve file only if it's >5bytes.
   keep <- c(keep,i)}
-  }
+}
 ```
 
-Note that the following files, associated with search terms, did not yield any results:
-`r files[keep]`
-
+`r if_else(length(files[-keep])!=0,  paste0("Note that the following files, associated with search terms, did not yield any results:</br> files[-keep]"), "")`
 
 ## Import and munge the xdd json into an R df
 ```{r import, echo=TRUE, message=FALSE, warning=FALSE}

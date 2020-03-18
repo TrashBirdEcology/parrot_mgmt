@@ -44,16 +44,8 @@ for(i in seq_along(files)){
   if(i==1) keep <-NULL
 if(file.info(files[i])$size > 5){ # retrieve file only if it's >5bytes.
   keep <- c(keep,i)}
-  }
+}
 ```
-
-Note that the following files, associated with search terms, did not
-yield any results:
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/“control+for+parrot”.txt,
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/“management+of+parrot”.txt,
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/“parrot+management”.txt,
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/parrot+control.txt,
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/parrot+management.txt
 
 ## Import and munge the xdd json into an R df
 
