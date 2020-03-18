@@ -1,0 +1,130 @@
+---
+title: "Using GeoDeepDive (xDD) to Ping the White and Grey Literature for Parrot Management"
+date: "Last updated: `r Sys.Date()`"
+output: github_document
+---
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-lightgrey.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+## About
+This project seeks to identify publications within which keywords related to parrot management or parrot culling has been referenced or mentioned. This project uses pre-extracted information available via API from the [GeoDeepDive](https://geodeepdive.org) infrastructure. 
+
+Note: This readme is difficult, I know, but is not currenlty intended for a broad audience. 
+Note2: Reproduction requires some knowledge or patience with Jupyter and R. 
+
+
+```{r setup, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+## if you open the .rproj you should be in the right directory, otherwise please set it here.
+# setwd("path/to/directory/)
+
+# source the R functions
+source("R/get_xdd_df.R")
+
+
+# load packages
+  library(ggpubr)
+  library(tidyverse)
+  library(jsonlite)
+  library(rjson)
+
+# plotting themes and settings
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+theme_set(ggpubr::theme_classic2())
+```
+
+## Hit the GeoDeepDive (xDD) API using a Jupyter Notebook
+### Step 1: Open the notebook
+Open the Jupyter notebook in your web browser by doing the following:
+1. Open terminal (Mac) or Command Line (Windows, Linux)
+2. Navigate to this directory (`cd ~/path/to/parrot_xdd/`)
+3. 
+
+```{r bbs_xdd_import_and_munge, message=FALSE, warning=FALSE,echo=}
+# Import the JSON files and munge into a single data frame ----------------
+files <- list.files(here::here("xdd_json"), pattern='.txt', full.names=TRUE)
+
+# import and munge the xdd json into an R df
+bbs_xdd <- suppressWarnings(get_xdd_df(files)) # do not turn off suppresswarnings -- there an rmd bug its annoying..
+```
+
+## Overview of parrot recirds in records available in the GeoDeepDive database.
+We can use various search terms to identify potential uses of the [NABBS](https://www.pwrc.usgs.gov/bbs/) data or results in the literature. For example, here we found __`r bbs_xdd %>% dplyr::select(-filename, -searchterm, -highlight) %>% n_distinct()`__ unique publications which used any of the following phrases exactly: 
+
+Exact search phrase | Number of unique records in xDD/GDD 
+--------------|----
+"North American Breeding Bird Survey" | `r bbs_xdd %>% filter(searchterm=="North American Breeding Bird Survey") %>% dplyr::select(-filename, -highlight) %>% n_distinct()` 
+"Breeding Bird Survey" |  `r bbs_xdd %>% filter(searchterm=="Breeding Bird Survey") %>% dplyr::select(-filename, -highlight) %>% n_distinct()` 
+"NABBS" | `r bbs_xdd %>% filter(searchterm=="NABBS") %>% dplyr::select(-filename, -highlight) %>% n_distinct()` 
+
+
+```{r pubsvtime, echo=FALSE}
+tmp <- bbs_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)   
+ggplot(tmp %>% group_by(searchterm, coveryear) %>% 
+         summarise(total_pubs = n()) %>% na.omit() %>% 
+         filter(coveryear <= 2022, coveryear >=1980)) +
+  geom_line(aes(x=coveryear, y=total_pubs, color=searchterm))+
+  scale_color_manual(values=cbPalette)+
+  labs(x="year", y="total records")+
+  theme(legend.title=element_blank(), legend.position = "top")
+``` 
+
+
+When we remove the redundancies in the records returned using the abovementioned searches,`r bbs_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% n_distinct() + bbs_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% filter(is.na(doi))%>% distinct()  %>% nrow() ` remain. 
+
+We can visualize the distribution of  records among unique publishers. Few publications contain the bulk of the records. 
+```{r topjrnls, echo=FALSE, message=FALSE, warning=FALSE}
+tmp <-  bbs_xdd %>% dplyr::select(-filename, -searchterm) %>% distinct()
+tmp <- bind_rows(tmp, bbs_xdd %>% dplyr::select(-filename, -searchterm)%>% filter(is.na(doi)) %>% distinct())
+
+ggplot(tmp %>% group_by(pubname) %>% 
+         summarise(n = n())) +
+  geom_histogram(aes(n))+
+  labs(x="number of publishers", y="total records")
+```
+
+Viewing the publications with at least 25 unique records:
+```{r topjrnls2, echo=FALSE, message=FALSE, warning=FALSE}
+tmp <- bbs_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)%>% group_by(pubname) %>% 
+         summarise(n = n()) %>% filter(n >25)   
+## the empty pubnames are USGS... so replace
+tmp$pubname <- sub("^$", "USGS", tmp$pubname)
+
+ggdotchart(
+           tmp, x = "pubname", y = "n",
+          rotate = TRUE,
+          ylab="number of records", 
+          xlab="",
+            sorting = "desc", title = "1980-present",
+          ggtheme = theme_minimal()
+          )
+```
+
+
+## Results Files
+Overviews of the results can be found in the [results](/results) folder in this repository.
+```{r write_outputs, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+dir.create("results")
+
+write.csv(bbs_xdd, "results/all_results.csv")
+```
+
+### Total records per publication
+Here is a comprehensive list of all publications with relevant terms (except "BBL"):
+```{r table_pubs, echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
+bbs_xdd %>% 
+  group_by(pubname) %>% 
+  summarise(count = n()) %>% 
+  na.omit(pubname) %>% 
+  kable(caption = "Number of records (count) per publication name (pubname)", format="markdown") %>%
+  kable_styling()
+````
+
+## More Information
+### This project relies on the UW Deepdive Infrastructure
+[See the UW deepdive infrastructure](UW-Deepdive-Infrastructure/app-template) for more details. Check out [the
+wiki](https://github.com/UW-Deepdive-Infrastructure/app-template/wiki)
+for more information on getting started.
+
+### Disclaimer
+
+This software is preliminary or provisional and is subject to revision. It is being provided to meet the need for timely best science. The software has not received final approval by the U.S. Geological Survey (USGS). No warranty, expressed or implied, is made by the USGS or the U.S. Government as to the functionality of the software and related material nor shall the fact of release constitute any such warranty. The software is provided on the condition that neither the USGS nor the U.S. Government shall be held liable for any damages resulting from the authorized or unauthorized use of the software.
