@@ -61,21 +61,23 @@ Note that the following files, associated with search terms, did not yield any r
 ## Import and munge the xdd json into an R df
 ```{r import, echo=TRUE, message=FALSE, warning=FALSE}
 parrot_xdd <- get_xdd_df(files[keep])
+parrot_unique <- parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::select(-searchterm)
 ```
 
-## Overview of parrot records retrieved from the GeoDeepDive database.
+## Overview of parrot records (`r paste("N= ", nrow(parrot_unique))`) retrieved from the GeoDeepDive database.
 We have used various search terms to identify potential works of relevance to parrot management. Here we found only __`r parrot_xdd %>% dplyr::select(-filename, -searchterm, -highlight) %>% n_distinct()`__ unique publications which used our terms (see ~/parrot_xDD.ipynb). 
 
-Exact search phrase | Number of unique records in xDD/GDD 
---------------|----
-"management of parrot*" | `r parrot_xdd %>% filter(grepl("management of parrot", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()`
-"parrot control" | `r parrot_xdd %>% filter(grepl("parrot control", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()`
-"parrot management" | `r parrot_xdd %>% filter(grepl("parrot management", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()`
+<!-- Exact search phrase | Number of unique records in xDD/GDD  -->
+<!-- --------------|---- -->
+<!-- "management of parrot*" | `r parrot_xdd %>% filter(grepl("management of parrot", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()` -->
+<!-- "parrot control" | `r parrot_xdd %>% filter(grepl("parrot control", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()` -->
+<!-- "parrot management" | `r parrot_xdd %>% filter(grepl("parrot management", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()` -->
+```{r papertable, echo=FALSE}
+kableExtra::kable(parrot_unique %>% dplyr::select(title, coveryear, pubname, doi, URL))
+```
 
-
-```{r pubsvtime, echo=FALSE}
-tmp <- parrot_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)   
-ggplot(tmp %>% group_by(searchterm, coveryear) %>% 
+```{r pubsvtime, echo=FALSE, eval=FALSE}
+ggplot(parrot_unique %>% group_by(searchterm, coveryear) %>% 
          summarise(total_pubs = n()) %>% na.omit()) +
   geom_point(aes(x=coveryear, y=total_pubs, color=searchterm))+
   scale_color_manual(values=cbPalette)+
@@ -83,11 +85,8 @@ ggplot(tmp %>% group_by(searchterm, coveryear) %>%
   theme(legend.title=element_blank(), legend.position = "top")
 ``` 
 
-
-When we remove the redundancies in the records returned using the abovementioned searches,`r parrot_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% n_distinct() + parrot_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% filter(is.na(doi))%>% distinct()  %>% nrow() ` remain. 
-
-We can visualize the distribution of  records among unique publishers. Few publications contain the bulk of the records. 
-```{r topjrnls, echo=FALSE, message=FALSE, warning=FALSE}
+<!-- Distribution of  records among unique publishers. -->
+```{r topjrnls, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 tmp <-  parrot_xdd %>% dplyr::select(-filename, -searchterm) %>% distinct()
 tmp <- bind_rows(tmp, parrot_xdd %>% dplyr::select(-filename, -searchterm)%>% filter(is.na(doi)) %>% distinct())
 
@@ -99,26 +98,24 @@ ggplot(tmp %>% group_by(pubname) %>%
 
 Distribution across publications:
 ```{r topjrnls2, echo=FALSE, message=FALSE, warning=FALSE}
-tmp <- parrot_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)%>% group_by(pubname) %>% 
-         summarise(n = n()) 
-## the empty pubnames are USGS... so replace
-tmp$pubname <- sub("^$", "USGS", tmp$pubname)
-
 ggdotchart(
-           tmp, x = "pubname", y = "n",
-          rotate = TRUE,
-          ylab="number of records", 
-          xlab="",
-            sorting = "desc", 
-          ggtheme = theme_minimal()
-          )
+  parrot_unique %>% group_by(pubname) %>%
+    summarise(n = n()) ,
+  x = "pubname",
+  y = "n",
+  rotate = TRUE,
+  ylab = "number of records",
+  xlab = "",
+  sorting = "desc",
+  ggtheme = theme_minimal()
+)
 ```
 
 ## Results Files
 Overviews of the results can be found in the [results](/results) folder in this repository.
 ```{r write_outputs, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 dir.create("out")
-write.csv(parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::select(-searchterm), "out/unique_results.csv")
+write.csv(parrot_unique, "out/unique_results.csv")
 ```
 
 ### Total records per publication

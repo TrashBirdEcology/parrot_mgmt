@@ -1,7 +1,7 @@
 Using GeoDeepDive (xDD) to Ping the White and Grey Literature for Parrot
 Management
 ================
-Last updated: 2020-03-17
+Last updated: 2020-03-18
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-lightgrey.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
@@ -49,39 +49,1023 @@ if(file.info(files[i])$size > 5){ # retrieve file only if it's >5bytes.
 
 Note that the following files, associated with search terms, did not
 yield any results:
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/management of
-parrot.txt,
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/parrot
-control.txt,
-/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/parrot
-management.txt
+/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/“control+for+parrot”.txt,
+/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/“management+of+parrot”.txt,
+/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/“parrot+management”.txt,
+/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/parrot+control.txt,
+/Users/jburnett/Documents/GitHub/parrot\_mgmt/xdd\_json/parrot+management.txt
 
 ## Import and munge the xdd json into an R df
 
 ``` r
 parrot_xdd <- get_xdd_df(files[keep])
+parrot_unique <- parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::select(-searchterm)
 ```
 
-## Overview of parrot records retrieved from the GeoDeepDive database.
+## Overview of parrot records (N= 27) retrieved from the GeoDeepDive database.
 
 We have used various search terms to identify potential works of
-relevance to parrot management. Here we found only **17** unique
+relevance to parrot management. Here we found only **28** unique
 publications which used our terms (see ~/parrot\_xDD.ipynb).
 
-| Exact search phrase      | Number of unique records in xDD/GDD |
-| ------------------------ | ----------------------------------- |
-| "management of parrot\*" | 7                                   |
-| “parrot control”         | 3                                   |
-| “parrot management”      | 7                                   |
+<!-- Exact search phrase | Number of unique records in xDD/GDD  -->
 
-![](README_files/figure-gfm/pubsvtime-1.png)<!-- -->
+<!-- --------------|---- -->
 
-When we remove the redundancies in the records returned using the
-abovementioned searches,17 remain.
+<!-- "management of parrot*" | 0 -->
 
-We can visualize the distribution of records among unique publishers.
-Few publications contain the bulk of the records.
-![](README_files/figure-gfm/topjrnls-1.png)<!-- -->
+<!-- "parrot control" | 0 -->
+
+<!-- "parrot management" | 0 -->
+
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+title
+
+</th>
+
+<th style="text-align:right;">
+
+coveryear
+
+</th>
+
+<th style="text-align:left;">
+
+pubname
+
+</th>
+
+<th style="text-align:left;">
+
+doi
+
+</th>
+
+<th style="text-align:left;">
+
+URL
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Contaminant-induced feminization and demasculinization of nonmammalian
+vertebrate males in aquatic environments
+
+</td>
+
+<td style="text-align:right;">
+
+2006
+
+</td>
+
+<td style="text-align:left;">
+
+Environmental Research
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.envres.2005.04.002
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0013935105000551>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Avian quarantine
+
+</td>
+
+<td style="text-align:right;">
+
+1997
+
+</td>
+
+<td style="text-align:left;">
+
+Australian Veterinary Journal
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1751-0813.1997.tb15361.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1751-0813.1997.tb15361.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+The evolution of plumage colouration in parrots: a review
+
+</td>
+
+<td style="text-align:right;">
+
+2010
+
+</td>
+
+<td style="text-align:left;">
+
+Emu - Austral Ornithology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1071/MU09076
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1071/MU09076>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Plant invasions in the rivers of the Iberian Peninsula, south-western
+Europe: A review
+
+</td>
+
+<td style="text-align:right;">
+
+2013
+
+</td>
+
+<td style="text-align:left;">
+
+Plant Biosystems - An International Journal Dealing with all Aspects of
+Plant Biology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/11263504.2013.861539
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.tandfonline.com/doi/abs/10.1080/11263504.2013.861539>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Using Myriophyllum aquaticum (Vell.) Verdc. to remove heavy metals from
+contaminated water: Better dead or alive?
+
+</td>
+
+<td style="text-align:right;">
+
+2018
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Environmental Management
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.jenvman.2018.02.074
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.sciencedirect.com/science/article/pii/S0301479718301816>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Projections of the oval nucleus of the hyperstriatum ventrale in the
+budgerigar: Relationships with the auditory system
+
+</td>
+
+<td style="text-align:right;">
+
+2001
+
+</td>
+
+<td style="text-align:left;">
+
+The Journal of Comparative Neurology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/cne.1115
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/cne.1115>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Harvesting, local trade, and conservation of parrots in the Northeastern
+Peruvian Amazon
+
+</td>
+
+<td style="text-align:right;">
+
+2003
+
+</td>
+
+<td style="text-align:left;">
+
+Biological Conservation
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/S0006-3207(03)00071-5
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.sciencedirect.com/science/article/pii/S0006320703000715>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+KERATOCONJUNCTIVITIS AND CHLAMYDIOSIS IN CAGE BIRDS
+
+</td>
+
+<td style="text-align:right;">
+
+1974
+
+</td>
+
+<td style="text-align:left;">
+
+Australian Veterinary Journal
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1751-0813.1974.tb14106.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1751-0813.1974.tb14106.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Assessment of UAV Operator Workload in A Reconfigurable Multi-Touch
+Ground Control Station Environment
+
+</td>
+
+<td style="text-align:right;">
+
+2016
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Unmanned Vehicle Systems
+
+</td>
+
+<td style="text-align:left;">
+
+10.1139/juvs-2015-0039
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.nrcresearchpress.com/doi/10.1139/juvs-2015-0039>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Drone services: issues in drones for location-based services from
+human-drone interaction to information processing
+
+</td>
+
+<td style="text-align:right;">
+
+NA
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Location Based Services
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/17489725.2018.1564845
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1080/17489725.2018.1564845>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Certified organic agriculture in China and Brazil: Market accessibility
+and outcomes following adoption
+
+</td>
+
+<td style="text-align:right;">
+
+2010
+
+</td>
+
+<td style="text-align:left;">
+
+Ecological Economics
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.ecolecon.2010.04.016
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S092180091000159X>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+ANATOMY OF A BOTTLENECK: DIAGNOSING FACTORS LIMITING POPULATION GROWTH
+IN THE PUERTO RICAN PARROT
+
+</td>
+
+<td style="text-align:right;">
+
+2008
+
+</td>
+
+<td style="text-align:left;">
+
+Ecological Monographs
+
+</td>
+
+<td style="text-align:left;">
+
+10.1890/07-0018.1
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1890/07-0018.1>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Strategic collection planning: Theory and practice
+
+</td>
+
+<td style="text-align:right;">
+
+1995
+
+</td>
+
+<td style="text-align:left;">
+
+Zoo Biology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/zoo.1430140103
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/zoo.1430140103>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+The effect of a closed area and beach seine exclusion on coral reef fish
+catches
+
+</td>
+
+<td style="text-align:right;">
+
+2001
+
+</td>
+
+<td style="text-align:left;">
+
+Fisheries Management and Ecology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1046/j.1365-2400.2001.00239.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1046/j.1365-2400.2001.00239.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A novel herpesvirus associated with respiratory disease in Bourke’s
+parrots ( Neopsephotus bourkii )
+
+</td>
+
+<td style="text-align:right;">
+
+2012
+
+</td>
+
+<td style="text-align:left;">
+
+Avian Pathology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/03079457.2012.732692
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.tandfonline.com/doi/abs/10.1080/03079457.2012.732692>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Avian research in the Caribbean: past contributions and current
+priorities
+
+</td>
+
+<td style="text-align:right;">
+
+2012
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Field Ornithology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1557-9263.2012.00361.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1557-9263.2012.00361.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+A review and an empirical analysis of privacy policy and notices for
+consumer Internet of things
+
+</td>
+
+<td style="text-align:right;">
+
+NA
+
+</td>
+
+<td style="text-align:left;">
+
+Security and Privacy
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/spy2.15
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/spy2.15>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Preferences of Orange-winged Amazon parrots (Amazona amazonica) for cage
+enrichment devices
+
+</td>
+
+<td style="text-align:right;">
+
+2009
+
+</td>
+
+<td style="text-align:left;">
+
+Applied Animal Behaviour Science
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.applanim.2009.06.006
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0168159109001932>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Ecological rhythms and the management of humid tropical forests Examples
+from the Caribbean National Forest, Puerto Rico
+
+</td>
+
+<td style="text-align:right;">
+
+2001
+
+</td>
+
+<td style="text-align:left;">
+
+Forest Ecology and Management
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/S0378-1127(01)00515-1
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0378112701005151>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+An economic assessment of the potential for predator management to
+benefit Puerto Rican parrots
+
+</td>
+
+<td style="text-align:right;">
+
+2003
+
+</td>
+
+<td style="text-align:left;">
+
+Ecological Economics
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/S0921-8009(03)00143-5
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0921800903001435>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Ground Parrots and fire in east Gippsland, Victoria: habitat occupancy
+modelling from automated sound recordings
+
+</td>
+
+<td style="text-align:right;">
+
+2016
+
+</td>
+
+<td style="text-align:left;">
+
+Emu - Austral Ornithology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1071/MU16014
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1071/MU16014>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Spatial and seasonal variation in abundance within an insular grey
+parrot population
+
+</td>
+
+<td style="text-align:right;">
+
+2017
+
+</td>
+
+<td style="text-align:left;">
+
+African Journal of Ecology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/aje.12367
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/aje.12367>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Situation-dependant management of large parrots by manipulation of the
+social environment
+
+</td>
+
+<td style="text-align:right;">
+
+2000
+
+</td>
+
+<td style="text-align:left;">
+
+International Zoo Yearbook
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1748-1090.2000.tb00729.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1748-1090.2000.tb00729.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Management of the Double-eyed or Red-browed fig parrot Cyclopsitta
+diophthalma macleayana at Currumbin Sanctuary, Queensland
+
+</td>
+
+<td style="text-align:right;">
+
+2000
+
+</td>
+
+<td style="text-align:left;">
+
+International Zoo Yearbook
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1748-1090.2000.tb00716.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1748-1090.2000.tb00716.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+General management principles and a checklist of strategies to guide
+forest biodiversity conservation
+
+</td>
+
+<td style="text-align:right;">
+
+2006
+
+</td>
+
+<td style="text-align:left;">
+
+Biological Conservation
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.biocon.2006.02.019
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0006320706000814>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Reed warblers discriminate cuckoos from sparrowhawks with graded alarm
+signals that attract mates and neighbours
+
+</td>
+
+<td style="text-align:right;">
+
+2008
+
+</td>
+
+<td style="text-align:left;">
+
+Animal Behaviour
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.anbehav.2008.03.020
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.sciencedirect.com/science/article/pii/S0003347208002170>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Foraging ‘enrichment’ as treatment for pterotillomania
+
+</td>
+
+<td style="text-align:right;">
+
+2008
+
+</td>
+
+<td style="text-align:left;">
+
+Applied Animal Behaviour Science
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.applanim.2007.05.015
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.sciencedirect.com/science/article/pii/S0168159107001669>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<!-- Distribution of  records among unique publishers. -->
 
 Distribution across publications:
 ![](README_files/figure-gfm/topjrnls2-1.png)<!-- -->
@@ -94,24 +1078,32 @@ in this repository.
 ### Total records per publication
 
 Here is a comprehensive list of all publications with relevant terms
-(except “BBL”):
+(except
+“BBL”):
 
-| pubname                          | count |
-| :------------------------------- | ----: |
-| African Journal of Ecology       |     1 |
-| Animal Behaviour                 |     1 |
-| Applied Animal Behaviour Science |     2 |
-| Avian Pathology                  |     1 |
-| Biological Conservation          |     1 |
-| Ecological Economics             |     2 |
-| Ecological Monographs            |     1 |
-| Emu - Austral Ornithology        |     1 |
-| Fisheries Management and Ecology |     1 |
-| Forest Ecology and Management    |     1 |
-| International Zoo Yearbook       |     2 |
-| Journal of Field Ornithology     |     1 |
-| Security and Privacy             |     1 |
-| Zoo Biology                      |     1 |
+| pubname                                                                               | count |
+| :------------------------------------------------------------------------------------ | ----: |
+| African Journal of Ecology                                                            |     2 |
+| Animal Behaviour                                                                      |     1 |
+| Applied Animal Behaviour Science                                                      |     3 |
+| Australian Veterinary Journal                                                         |     2 |
+| Avian Pathology                                                                       |     1 |
+| Biological Conservation                                                               |     2 |
+| Ecological Economics                                                                  |     3 |
+| Ecological Monographs                                                                 |     1 |
+| Emu - Austral Ornithology                                                             |     3 |
+| Environmental Research                                                                |     1 |
+| Fisheries Management and Ecology                                                      |     1 |
+| Forest Ecology and Management                                                         |     2 |
+| International Zoo Yearbook                                                            |     4 |
+| Journal of Environmental Management                                                   |     1 |
+| Journal of Field Ornithology                                                          |     1 |
+| Journal of Location Based Services                                                    |     1 |
+| Journal of Unmanned Vehicle Systems                                                   |     1 |
+| Plant Biosystems - An International Journal Dealing with all Aspects of Plant Biology |     1 |
+| Security and Privacy                                                                  |     1 |
+| The Journal of Comparative Neurology                                                  |     1 |
+| Zoo Biology                                                                           |     1 |
 
 ## More Information
 
