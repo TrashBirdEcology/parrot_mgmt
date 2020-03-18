@@ -120,7 +120,7 @@ ggdotchart(
 Overviews of the results can be found in the [results](/results) folder in this repository.
 ```{r write_outputs, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
 dir.create("out")
-write.csv(parrot_xdd, "out/all_results.csv")
+write.csv(parrot_xdd %>% distinct("pubname","publisher","X_gddid","title","doi","coverDate","URL","authors"   , "highlight", "filename", "coveryear" ), "out/unique_results.csv")
 ```
 
 ### Total records per publication
