@@ -18,21 +18,21 @@ patience with Jupyter and R.
 
 ## Hit up the GeoDeepDive (xDD) API using a Jupyter Notebook
 
-### Step 1: Open the notebook
-
-Open the Jupyter notebook in your web browser by doing the following: 1.
-Open terminal (Mac) or Command Line (Windows, Linux) 2. Navigate to this
-directory (`cd ~/path/to/parrot_xdd/`) 3. Open the .ipynb (type:
-`jupyter notebook`). This opens the notebook directory in your web
-browser. 4. Navigate to (i.e. click) the file `parrot_xDD.ipynb`: this
-will open the notebook and a Kernel. 5. Edit the terms (keywords, search
-phrases). Edit the code chunk containing terms - See section: `Set a
-term or loop through terms`  
-\- `terms = [...]` 6. Save the notebook (it typically autosaves but just
-to be safe). Ctrl+S (MS) or Cmd+S (Mac) or \>File\>Save and Checkpoint
-7. Execute the notebook (Run or \>Kernel\>Restart and Run All) 8.
-Navigate to the results
-(~/xdd\_json/).
+Open the Jupyter notebook in your web browser by doing the following:  
+1\. Open terminal (Mac) or Command Line (Windows, Linux)  
+2\. Navigate to this directory (`cd ~/path/to/parrot_xdd/`)  
+3\. Open the .ipynb (type: `jupyter notebook`). This opens the notebook
+directory in your web browser.  
+4\. Navigate to (i.e. click) the file `parrot_xDD.ipynb`: this will open
+the notebook and a Kernel.  
+5\. Edit the terms (keywords, search phrases). Edit the code chunk
+containing terms. See section: `Set a term or loop through terms`, and
+edit inside brackets at `terms = [...]`  
+6\. Save the notebook (it typically autosaves but just to be safe).
+Ctrl+S (MS) or Cmd+S (Mac) or \>File\>Save and Checkpoint  
+7\. Execute the notebook (Run or \>Kernel\>Restart and Run All)  
+8\. Navigate to the results
+(~/xdd\_json/)
 
 ## Import the JSON results to R
 
