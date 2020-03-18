@@ -13,12 +13,10 @@ Note2: Reproduction requires some knowledge or patience with Jupyter and R.
 
 
 ```{r setup, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
-## if you open the .rproj you should be in the right directory, otherwise please set it here.
-# setwd("path/to/directory/)
+## if you open the .rproj you should be in the right directory (repository root)
 
-# source the R functions
+# source the R function(s)
 source("R/get_xdd_df.R")
-
 
 # load packages
   library(ggpubr)
@@ -31,49 +29,69 @@ cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
 theme_set(ggpubr::theme_classic2())
 ```
 
-## Hit the GeoDeepDive (xDD) API using a Jupyter Notebook
+## Hit up the GeoDeepDive (xDD) API using a Jupyter Notebook
 ### Step 1: Open the notebook
 Open the Jupyter notebook in your web browser by doing the following:
 1. Open terminal (Mac) or Command Line (Windows, Linux)
 2. Navigate to this directory (`cd ~/path/to/parrot_xdd/`)
-3. 
+3. Open the .ipynb (type: `jupyter notebook`).  This opens the notebook directory in your web browser. 
+4. Navigate to (i.e. click) the file `parrot_xDD.ipynb`: this will open the notebook and a Kernel.
+5. Edit the terms (keywords, search phrases). Edit the code chunk containing terms
+- See section: `Set a term or loop through terms`  
+- `terms = [...]`
+6. Save the notebook (it typically autosaves but just to be safe). Ctrl+S (MS) or Cmd+S (Mac) or >File>Save and Checkpoint
+7. Execute the notebook (Run or >Kernel>Restart and Run All)
+8. Navigate to the results (~/xdd_json/).
 
-```{r bbs_xdd_import_and_munge, message=FALSE, warning=FALSE,echo=}
+
+## Import the JSON results to R
+```{r filestoimport, message=FALSE, warning=FALSE,echo=TRUE}
 # Import the JSON files and munge into a single data frame ----------------
 files <- list.files(here::here("xdd_json"), pattern='.txt', full.names=TRUE)
-
-# import and munge the xdd json into an R df
-bbs_xdd <- suppressWarnings(get_xdd_df(files)) # do not turn off suppresswarnings -- there an rmd bug its annoying..
+# Identify and delete the empty .txt files. Yes, this is poor practice but oh well!
+for(i in seq_along(files)){
+  if(i==1) keep <-NULL
+if(file.info(files[i])$size > 5){ # retrieve file only if it's >5bytes.
+  keep <- c(keep,i)}
+  }
 ```
 
-## Overview of parrot recirds in records available in the GeoDeepDive database.
-We can use various search terms to identify potential uses of the [NABBS](https://www.pwrc.usgs.gov/bbs/) data or results in the literature. For example, here we found __`r bbs_xdd %>% dplyr::select(-filename, -searchterm, -highlight) %>% n_distinct()`__ unique publications which used any of the following phrases exactly: 
+Note that the following files, associated with search terms, did not yield any results:
+`r files[keep]`
+
+
+## Import and munge the xdd json into an R df
+```{r import, echo=TRUE, message=FALSE, warning=FALSE}
+parrot_xdd <- get_xdd_df(files[keep])
+```
+
+## Overview of parrot records retrieved from the GeoDeepDive database.
+We have used various search terms to identify potential works of relevance to parrot management. Here we found only __`r parrot_xdd %>% dplyr::select(-filename, -searchterm, -highlight) %>% n_distinct()`__ unique publications which used our terms (see ~/parrot_xDD.ipynb). 
 
 Exact search phrase | Number of unique records in xDD/GDD 
 --------------|----
-"North American Breeding Bird Survey" | `r bbs_xdd %>% filter(searchterm=="North American Breeding Bird Survey") %>% dplyr::select(-filename, -highlight) %>% n_distinct()` 
-"Breeding Bird Survey" |  `r bbs_xdd %>% filter(searchterm=="Breeding Bird Survey") %>% dplyr::select(-filename, -highlight) %>% n_distinct()` 
-"NABBS" | `r bbs_xdd %>% filter(searchterm=="NABBS") %>% dplyr::select(-filename, -highlight) %>% n_distinct()` 
+"management of parrot*" | `r parrot_xdd %>% filter(grepl("management of parrot", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()`
+"parrot control" | `r parrot_xdd %>% filter(grepl("parrot control", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()`
+"parrot management" | `r parrot_xdd %>% filter(grepl("parrot management", searchterm, ignore.case = TRUE)) %>% dplyr::select(-filename, -highlight) %>% n_distinct()`
 
 
 ```{r pubsvtime, echo=FALSE}
-tmp <- bbs_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)   
+tmp <- parrot_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)   
 ggplot(tmp %>% group_by(searchterm, coveryear) %>% 
-         summarise(total_pubs = n()) %>% na.omit() %>% 
-         filter(coveryear <= 2022, coveryear >=1980)) +
-  geom_line(aes(x=coveryear, y=total_pubs, color=searchterm))+
+         summarise(total_pubs = n()) %>% na.omit()) +
+  geom_point(aes(x=coveryear, y=total_pubs, color=searchterm))+
   scale_color_manual(values=cbPalette)+
   labs(x="year", y="total records")+
   theme(legend.title=element_blank(), legend.position = "top")
 ``` 
 
 
-When we remove the redundancies in the records returned using the abovementioned searches,`r bbs_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% n_distinct() + bbs_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% filter(is.na(doi))%>% distinct()  %>% nrow() ` remain. 
+When we remove the redundancies in the records returned using the abovementioned searches,`r parrot_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% n_distinct() + parrot_xdd %>% dplyr::select(-filename, -highlight, -searchterm) %>% filter(is.na(doi))%>% distinct()  %>% nrow() ` remain. 
 
 We can visualize the distribution of  records among unique publishers. Few publications contain the bulk of the records. 
 ```{r topjrnls, echo=FALSE, message=FALSE, warning=FALSE}
-tmp <-  bbs_xdd %>% dplyr::select(-filename, -searchterm) %>% distinct()
-tmp <- bind_rows(tmp, bbs_xdd %>% dplyr::select(-filename, -searchterm)%>% filter(is.na(doi)) %>% distinct())
+tmp <-  parrot_xdd %>% dplyr::select(-filename, -searchterm) %>% distinct()
+tmp <- bind_rows(tmp, parrot_xdd %>% dplyr::select(-filename, -searchterm)%>% filter(is.na(doi)) %>% distinct())
 
 ggplot(tmp %>% group_by(pubname) %>% 
          summarise(n = n())) +
@@ -81,10 +99,10 @@ ggplot(tmp %>% group_by(pubname) %>%
   labs(x="number of publishers", y="total records")
 ```
 
-Viewing the publications with at least 25 unique records:
+Distribution across publications:
 ```{r topjrnls2, echo=FALSE, message=FALSE, warning=FALSE}
-tmp <- bbs_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)%>% group_by(pubname) %>% 
-         summarise(n = n()) %>% filter(n >25)   
+tmp <- parrot_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)%>% group_by(pubname) %>% 
+         summarise(n = n()) 
 ## the empty pubnames are USGS... so replace
 tmp$pubname <- sub("^$", "USGS", tmp$pubname)
 
@@ -93,25 +111,23 @@ ggdotchart(
           rotate = TRUE,
           ylab="number of records", 
           xlab="",
-            sorting = "desc", title = "1980-present",
+            sorting = "desc", 
           ggtheme = theme_minimal()
           )
 ```
 
-
 ## Results Files
 Overviews of the results can be found in the [results](/results) folder in this repository.
 ```{r write_outputs, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
-dir.create("results")
-
-write.csv(bbs_xdd, "results/all_results.csv")
+dir.create("out")
+write.csv(parrot_xdd, "out/all_results.csv")
 ```
 
 ### Total records per publication
 Here is a comprehensive list of all publications with relevant terms (except "BBL"):
 ```{r table_pubs, echo=FALSE, warning=FALSE, message=FALSE}
 library(kableExtra)
-bbs_xdd %>% 
+parrot_xdd %>% distinct(coveryear, pubname, publisher, title, authors, searchterm)%>%
   group_by(pubname) %>% 
   summarise(count = n()) %>% 
   na.omit(pubname) %>% 
@@ -126,5 +142,4 @@ wiki](https://github.com/UW-Deepdive-Infrastructure/app-template/wiki)
 for more information on getting started.
 
 ### Disclaimer
-
 This software is preliminary or provisional and is subject to revision. It is being provided to meet the need for timely best science. The software has not received final approval by the U.S. Geological Survey (USGS). No warranty, expressed or implied, is made by the USGS or the U.S. Government as to the functionality of the software and related material nor shall the fact of release constitute any such warranty. The software is provided on the condition that neither the USGS nor the U.S. Government shall be held liable for any damages resulting from the authorized or unauthorized use of the software.
