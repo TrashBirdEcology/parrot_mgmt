@@ -58,7 +58,7 @@ parrot_unique <- parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::selec
 
 We have used various search terms to identify potential works of
 relevance to parrot management. Using various searches (see
-`parrot_xdd.ipynb`), we identified **51** unique publications.
+`parrot_xdd.ipynb`), we identified **50** unique publications.
 
 <!-- Exact search phrase | Number of unique records in xDD/GDD  -->
 
