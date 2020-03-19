@@ -1872,13 +1872,10 @@ Distribution across publications:
 ## Results Files
 
 Overviews of the results can be found in the [results](/results) folder
-in this repository.
+in this
+repository.
 
 ### Total records per publication
-
-Here is a comprehensive list of all publications with relevant terms
-(except
-“BBL”):
 
 | pubname                                                                                                                           | count |
 | :-------------------------------------------------------------------------------------------------------------------------------- | ----: |
