@@ -1,7 +1,7 @@
 Using GeoDeepDive (xDD) to Ping the White and Grey Literature for Parrot
 Management
 ================
-Last updated: 2020-03-18
+Last updated: 2020-03-19
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-lightgrey.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
@@ -54,10 +54,10 @@ parrot_xdd <- get_xdd_df(files[keep])
 parrot_unique <- parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::select(-searchterm)
 ```
 
-## Overview of parrot records (N= 27) retrieved from the GeoDeepDive database.
+## Overview of parrot records (N= 50) retrieved from the GeoDeepDive database.
 
 We have used various search terms to identify potential works of
-relevance to parrot management. Here we found only **28** unique
+relevance to parrot management. Here we found only **51** unique
 publications which used our terms (see ~/parrot\_xDD.ipynb).
 
 <!-- Exact search phrase | Number of unique records in xDD/GDD  -->
@@ -111,6 +111,42 @@ URL
 </thead>
 
 <tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Monk Parakeets An Expanding Problem on Power Lines and Other Electrical
+Utility Structures
+
+</td>
+
+<td style="text-align:right;">
+
+2008
+
+</td>
+
+<td style="text-align:left;">
+
+Environment Concerns in Rights-of-Way Management 8th International
+Symposium 12–16 September 2004 Saratoga Springs, New York, USA
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/B978-044453223-7.50043-5
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/B9780444532237500435>
+
+</td>
+
+</tr>
 
 <tr>
 
@@ -708,6 +744,673 @@ Security and Privacy
 
 <td style="text-align:left;">
 
+Nest tree selection in a crowded introduced population of Monk Parakeet
+( Myiopsitta monachus ) in Rome (central Italy): evidence for
+selectivity
+
+</td>
+
+<td style="text-align:right;">
+
+2017
+
+</td>
+
+<td style="text-align:left;">
+
+Zoology and Ecology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/21658005.2017.1366293
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1080/21658005.2017.1366293>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Trade and conservation implications of new beak and feather disease
+virus detection in native and introduced parrots
+
+</td>
+
+<td style="text-align:right;">
+
+2018
+
+</td>
+
+<td style="text-align:left;">
+
+Conservation Biology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/cobi.13214
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/cobi.13214>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Potential distribution of alien parakeets in Tuscany (Central Italy): a
+bioclimatic model approach
+
+</td>
+
+<td style="text-align:right;">
+
+2014
+
+</td>
+
+<td style="text-align:left;">
+
+Ethology Ecology & Evolution
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/03949370.2014.895424
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.tandfonline.com/doi/abs/10.1080/03949370.2014.895424>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Detailed monitoring of a small but recovering population reveals
+sublethal effects of disease and unexpected interactions with
+supplemental feeding
+
+</td>
+
+<td style="text-align:right;">
+
+2015
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Animal Ecology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/1365-2656.12348
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/1365-2656.12348>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+The parakeet protectors: Understanding opposition to introduced species
+management
+
+</td>
+
+<td style="text-align:right;">
+
+2019
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Environmental Management
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.jenvman.2017.11.036
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.sciencedirect.com/science/article/pii/S0301479717311118>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Deterring hooded crows from re-nesting on power poles
+
+</td>
+
+<td style="text-align:right;">
+
+2012
+
+</td>
+
+<td style="text-align:left;">
+
+Wildlife Society Bulletin
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/wsb.211
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/wsb.211>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Long-term, fine-scale temporal patterns of genetic diversity in the
+restored Mauritius parakeet reveal genetic impacts of management and
+associated demographic effects on reintroduction programmes
+
+</td>
+
+<td style="text-align:right;">
+
+2013
+
+</td>
+
+<td style="text-align:left;">
+
+Biological Conservation
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.biocon.2013.02.013
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S000632071300061X>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Mediterranean versus Atlantic monk parakeets Myiopsitta monachus :
+Towards differentiated management at the European scale
+
+</td>
+
+<td style="text-align:right;">
+
+NA
+
+</td>
+
+<td style="text-align:left;">
+
+Pest Management Science
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/ps.5320
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/ps.5320>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Unrelenting spread of the alien monk parakeet Myiopsitta monachus in
+Israel. Is it time to sound the alarm?
+
+</td>
+
+<td style="text-align:right;">
+
+2016
+
+</td>
+
+<td style="text-align:left;">
+
+Pest Management Science
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/ps.4349
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/ps.4349>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Concerns regarding the scientific evidence informing impact risk
+assessment and management recommendations for invasive birds
+
+</td>
+
+<td style="text-align:right;">
+
+2011
+
+</td>
+
+<td style="text-align:left;">
+
+Biological Conservation
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.biocon.2011.05.001
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0006320711001881>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Social–ecological mismatches create conservation challenges in
+introduced species management
+
+</td>
+
+<td style="text-align:right;">
+
+2019
+
+</td>
+
+<td style="text-align:left;">
+
+Frontiers in Ecology and the Environment
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/fee.2000
+
+</td>
+
+<td style="text-align:left;">
+
+<https://onlinelibrary.wiley.com/doi/abs/10.1002/fee.2000>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Monk parakeet nest-site selection of electric utility structures in
+Texas
+
+</td>
+
+<td style="text-align:right;">
+
+2014
+
+</td>
+
+<td style="text-align:left;">
+
+Landscape and Urban Planning
+
+</td>
+
+<td style="text-align:left;">
+
+10.1016/j.landurbplan.2014.04.016
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.sciencedirect.com/science/article/pii/S0169204614001005>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Worldwide impact of alien parrots (Aves Psittaciformes) on native
+biodiversity and environment: a review
+
+</td>
+
+<td style="text-align:right;">
+
+2014
+
+</td>
+
+<td style="text-align:left;">
+
+Ethology Ecology & Evolution
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/03949370.2014.905981
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.tandfonline.com/doi/abs/10.1080/03949370.2014.905981>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Interspecific interactions in nesting and feeding urban sites among
+introduced Monk Parakeet ( Myiopsitta monachus ) and syntopic bird
+species
+
+</td>
+
+<td style="text-align:right;">
+
+2016
+
+</td>
+
+<td style="text-align:left;">
+
+Ethology Ecology & Evolution
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/03949370.2015.1119761
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1080/03949370.2015.1119761>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Preliminary evidence suggests extra-pair mating in the endangered echo
+parakeet, Psittacula eques
+
+</td>
+
+<td style="text-align:right;">
+
+2015
+
+</td>
+
+<td style="text-align:left;">
+
+African Zoology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/15627020.2009.11407440
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1080/15627020.2009.11407440>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+AFFECTIVE ETHOLOGIES
+
+</td>
+
+<td style="text-align:right;">
+
+2015
+
+</td>
+
+<td style="text-align:left;">
+
+Angelaki
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/0969725X.2015.1065118
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1080/0969725X.2015.1065118>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Characterization of Mauritius parakeet ( Psittacula eques )
+microsatellite loci and their cross-utility in other parrots
+(Psittacidae, Aves)
+
+</td>
+
+<td style="text-align:right;">
+
+2009
+
+</td>
+
+<td style="text-align:left;">
+
+Molecular Ecology Resources
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1755-0998.2009.02621.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1755-0998.2009.02621.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Establishment success of invasive ring-necked and monk parakeets in
+Europe
+
+</td>
+
+<td style="text-align:right;">
+
+2009
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Biogeography
+
+</td>
+
+<td style="text-align:left;">
+
+10.1111/j.1365-2699.2009.02177.x
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1111/j.1365-2699.2009.02177.x>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Diazacon Inhibits Reproduction in Invasive Monk Parakeet Populations
+
+</td>
+
+<td style="text-align:right;">
+
+2008
+
+</td>
+
+<td style="text-align:left;">
+
+Journal of Wildlife Management
+
+</td>
+
+<td style="text-align:left;">
+
+10.2193/2007-391
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.bioone.org/doi/abs/10.2193/2007-391>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
 Preferences of Orange-winged Amazon parrots (Amazona amazonica) for cage
 enrichment devices
 
@@ -953,6 +1656,110 @@ International Zoo Yearbook
 
 <td style="text-align:left;">
 
+The Large-Scale Removal of Mammalian Invasive Alien Species in Northern
+Europe
+
+</td>
+
+<td style="text-align:right;">
+
+2015
+
+</td>
+
+<td style="text-align:left;">
+
+Pest Management Science
+
+</td>
+
+<td style="text-align:left;">
+
+10.1002/ps.4224
+
+</td>
+
+<td style="text-align:left;">
+
+<http://doi.wiley.com/10.1002/ps.4224>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Factors Related to Farmers’ Preferences to Decrease Monk Parakeet Damage
+to Crops
+
+</td>
+
+<td style="text-align:right;">
+
+2013
+
+</td>
+
+<td style="text-align:left;">
+
+Human Dimensions of Wildlife
+
+</td>
+
+<td style="text-align:left;">
+
+10.1080/10871209.2013.745102
+
+</td>
+
+<td style="text-align:left;">
+
+<http://www.tandfonline.com/doi/abs/10.1080/10871209.2013.745102>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+Threats from introduced birds to native birds
+
+</td>
+
+<td style="text-align:right;">
+
+2014
+
+</td>
+
+<td style="text-align:left;">
+
+Emu - Austral Ornithology
+
+</td>
+
+<td style="text-align:left;">
+
+10.1071/MU12122
+
+</td>
+
+<td style="text-align:left;">
+
+<https://www.tandfonline.com/doi/full/10.1071/MU12122>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
 General management principles and a checklist of strategies to guide
 forest biodiversity conservation
 
@@ -1073,29 +1880,44 @@ Here is a comprehensive list of all publications with relevant terms
 (except
 “BBL”):
 
-| pubname                                                                               | count |
-| :------------------------------------------------------------------------------------ | ----: |
-| African Journal of Ecology                                                            |     2 |
-| Animal Behaviour                                                                      |     1 |
-| Applied Animal Behaviour Science                                                      |     3 |
-| Australian Veterinary Journal                                                         |     2 |
-| Avian Pathology                                                                       |     1 |
-| Biological Conservation                                                               |     2 |
-| Ecological Economics                                                                  |     3 |
-| Ecological Monographs                                                                 |     1 |
-| Emu - Austral Ornithology                                                             |     3 |
-| Environmental Research                                                                |     1 |
-| Fisheries Management and Ecology                                                      |     1 |
-| Forest Ecology and Management                                                         |     2 |
-| International Zoo Yearbook                                                            |     4 |
-| Journal of Environmental Management                                                   |     1 |
-| Journal of Field Ornithology                                                          |     1 |
-| Journal of Location Based Services                                                    |     1 |
-| Journal of Unmanned Vehicle Systems                                                   |     1 |
-| Plant Biosystems - An International Journal Dealing with all Aspects of Plant Biology |     1 |
-| Security and Privacy                                                                  |     1 |
-| The Journal of Comparative Neurology                                                  |     1 |
-| Zoo Biology                                                                           |     1 |
+| pubname                                                                                                                           | count |
+| :-------------------------------------------------------------------------------------------------------------------------------- | ----: |
+| African Journal of Ecology                                                                                                        |     2 |
+| African Zoology                                                                                                                   |     2 |
+| Angelaki                                                                                                                          |     2 |
+| Animal Behaviour                                                                                                                  |     1 |
+| Applied Animal Behaviour Science                                                                                                  |     3 |
+| Australian Veterinary Journal                                                                                                     |     2 |
+| Avian Pathology                                                                                                                   |     1 |
+| Biological Conservation                                                                                                           |     6 |
+| Conservation Biology                                                                                                              |     2 |
+| Ecological Economics                                                                                                              |     3 |
+| Ecological Monographs                                                                                                             |     1 |
+| Emu - Austral Ornithology                                                                                                         |     4 |
+| Environment Concerns in Rights-of-Way Management 8th International Symposium 12–16 September 2004 Saratoga Springs, New York, USA |     1 |
+| Environmental Research                                                                                                            |     1 |
+| Ethology Ecology & Evolution                                                                                                      |     6 |
+| Fisheries Management and Ecology                                                                                                  |     1 |
+| Forest Ecology and Management                                                                                                     |     2 |
+| Frontiers in Ecology and the Environment                                                                                          |     2 |
+| Human Dimensions of Wildlife                                                                                                      |     1 |
+| International Zoo Yearbook                                                                                                        |     4 |
+| Journal of Animal Ecology                                                                                                         |     2 |
+| Journal of Biogeography                                                                                                           |     2 |
+| Journal of Environmental Management                                                                                               |     5 |
+| Journal of Field Ornithology                                                                                                      |     1 |
+| Journal of Location Based Services                                                                                                |     1 |
+| Journal of Unmanned Vehicle Systems                                                                                               |     1 |
+| Journal of Wildlife Management                                                                                                    |     2 |
+| Landscape and Urban Planning                                                                                                      |     2 |
+| Molecular Ecology Resources                                                                                                       |     2 |
+| Pest Management Science                                                                                                           |     7 |
+| Plant Biosystems - An International Journal Dealing with all Aspects of Plant Biology                                             |     1 |
+| Security and Privacy                                                                                                              |     1 |
+| The Journal of Comparative Neurology                                                                                              |     1 |
+| Wildlife Society Bulletin                                                                                                         |     2 |
+| Zoo Biology                                                                                                                       |     1 |
+| Zoology and Ecology                                                                                                               |     2 |
 
 ## More Information
 
