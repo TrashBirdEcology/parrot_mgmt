@@ -63,7 +63,7 @@ parrot_unique <- parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::selec
 ```
 
 ## Overview of parrot records (`r paste("N= ", nrow(parrot_unique))`) retrieved from the GeoDeepDive database.
-We have used various search terms to identify potential works of relevance to parrot management. Here we found only __`r parrot_xdd %>% dplyr::select(-filename, -searchterm, -highlight) %>% n_distinct()`__ unique publications which used our terms (see ~/parrot_xDD.ipynb). 
+We have used various search terms to identify potential works of relevance to parrot management. Using various searches (see `parrot_xdd.ipynb`), we identified  __`r parrot_xdd %>% dplyr::select(-filename, -searchterm, -highlight) %>% n_distinct()`__ unique publications. 
 
 <!-- Exact search phrase | Number of unique records in xDD/GDD  -->
 <!-- --------------|---- -->

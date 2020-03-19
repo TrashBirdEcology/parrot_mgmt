@@ -57,8 +57,8 @@ parrot_unique <- parrot_xdd %>% distinct(doi, .keep_all = TRUE) %>% dplyr::selec
 ## Overview of parrot records (N= 50) retrieved from the GeoDeepDive database.
 
 We have used various search terms to identify potential works of
-relevance to parrot management. Here we found only **51** unique
-publications which used our terms (see ~/parrot\_xDD.ipynb).
+relevance to parrot management. Using various searches (see
+`parrot_xdd.ipynb`), we identified **51** unique publications.
 
 <!-- Exact search phrase | Number of unique records in xDD/GDD  -->
 
